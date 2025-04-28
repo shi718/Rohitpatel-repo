@@ -1,0 +1,30 @@
+def rotated_binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+        
+        # If the target is found
+        if arr[mid] == target:
+            return mid
+        
+        # Left half is sorted
+        if arr[left] <= arr[mid]:
+            if arr[left] <= target < arr[mid]:
+                right = mid - 1  # Target in left half
+            else:
+                left = mid + 1   # Target in right half
+        # Right half is sorted
+        else:
+            if arr[mid] < target <= arr[right]:
+                left = mid + 1   # Target in right half
+            else:
+                right = mid - 1  # Target in left half
+    
+    return -1  # Target not found
+
+# Example usage
+arr = [6, 7, 8, 1, 2, 3, 4, 5]
+target = 3
+result = rotated_binary_search(arr, target)
+print("Target found at index:", result)
